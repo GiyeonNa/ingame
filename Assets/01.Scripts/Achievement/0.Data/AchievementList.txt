@@ -1,0 +1,9 @@
+Id,Name,Description,Condition,GoalValue,RewardCurrencyType,RewardValue
+ACH_GOLD_1000,첫 골드 수집,골드를 1,000개 모으세요.,GoldCollect,1000,Gold,100
+ACH_DRON_50,드론 사냥꾼,드론을 50마리 처치하세요.,DronKillCount,50,Gold,200
+ACH_BOSS_1,첫 보스 격파,보스를 1회 처치하세요.,BossKillCount,1,Gem,10
+ACH_PLAYTIME_60,한 시간의 도전,플레이 타임 60분 달성.,PlayTime,60,Gold,300
+ACH_GOLD_10000,부자 되기,골드를 10,000개 모으세요.,GoldCollect,10000,Gem,20
+ACH_DRON_200,드론 학살자,드론을 200마리 처치하세요.,DronKillCount,200,Gold,500
+ACH_BOSS_10,보스 헌터,보스를 10회 처치하세요.,BossKillCount,10,Gem,50
+ACH_TRIGGER_SECRET,비밀 발견,숨겨진 트리거를 발견하세요.,Trigger,1,Gem,100
