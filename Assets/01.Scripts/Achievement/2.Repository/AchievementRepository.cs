@@ -33,6 +33,12 @@ public class AchievementRepository
     
         return data.DataList ?? new List<AchievementSaveData>();
     }
+
+    public void Clear()
+    {
+        PlayerPrefs.DeleteKey(SAVE_KEY);
+        PlayerPrefs.Save();
+    }
 }
 
 [Serializable]

@@ -173,4 +173,12 @@ public class AchievementManager : MonoBehaviour
         return _achievements.Find(a => a.Id == id);
 
     }
+
+    public void ResetAchievements()
+    {
+        _achievementRepository.Clear();
+        _achievements.Clear();
+        Init(); // 메타데이터로 다시 초기화
+        DataChange?.Invoke();
+    }
 }
