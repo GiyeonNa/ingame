@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_GUID: 9d3e9d157632cca4b927e0691ced35a7
+  m_SerializeEntries:
+  - m_GUID: d920ee6c1f391104e98c637e06e5f0a9
+    m_Address: AchievementList
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AchievementCSV
+    - CSV
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 22bc911a08ae3f0409476759b185543f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 44909a60b2cbecd42a15de5cf299a45a, type: 2}
+    - {fileID: 11400000, guid: 4bb7e008bf321d8469b8acc84a09d5ec, type: 2}

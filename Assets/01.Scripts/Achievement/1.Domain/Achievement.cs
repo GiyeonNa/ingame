@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static AchievementManager;
 
 public enum EAchievementCondition
 {
@@ -63,6 +64,33 @@ public class Achievement
         GoalValue = metaData.GoalValue;
         RewardCurrencyType = metaData.RewardCurrencyType;
         RewardValue = metaData.RewardValue;
+
+        _currentValue = saveData.CurrentValue;
+        _isCompleted = saveData.IsCompleted;
+        _isRewarded = saveData.IsRewarded;
+    }
+
+    public Achievement(AchievementCSVData data)
+    {
+        Id = data.Id;
+        Name = data.Name;
+        Description = data.Description;
+        Condition = data.Condition;
+        GoalValue = data.GoalValue;
+        RewardCurrencyType = data.RewardCurrencyType;
+        RewardValue = data.RewardValue;
+        // 나머지 필드 초기화
+    }
+
+    public Achievement(AchievementCSVData data, AchievementSaveData saveData)
+    {
+        Id = data.Id;
+        Name = data.Name;
+        Description = data.Description;
+        Condition = data.Condition;
+        GoalValue = data.GoalValue;
+        RewardCurrencyType = data.RewardCurrencyType;
+        RewardValue = data.RewardValue;
 
         _currentValue = saveData.CurrentValue;
         _isCompleted = saveData.IsCompleted;
