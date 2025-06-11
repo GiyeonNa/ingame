@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -24,6 +23,9 @@ public class AchievementManager : MonoBehaviour
 
     private AchievementRepository _achievementRepository;
 
+    private string _csvAddress = "AchievementCSV"; // Addressable 주소
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -40,7 +42,27 @@ public class AchievementManager : MonoBehaviour
 
     private void Init()
     {
-        StartCoroutine(LoadAchievementsFromCSV());
+        StartCoroutine(CSVReader.ParseFromAddressable<AchievementCSVData>(_csvAddress, items =>
+        {
+            if (items != null)
+            {
+                _achievementRepository = new AchievementRepository();
+                var savedList = _achievementRepository.Load();
+
+                _achievements.Clear();
+                foreach (var meta in items)
+                {
+                    var saved = savedList?.Find(x => x.Id == meta.Id);
+                    if (saved != null)
+                        _achievements.Add(new Achievement(meta, saved.Value));
+                    else
+                        _achievements.Add(new Achievement(meta));
+                }
+                DataChange?.Invoke();
+            }
+        }));
+
+        //StartCoroutine(LoadAchievementsFromCSV());
         //_achievementRepository = new AchievementRepository();
 
         //List<AchievementSaveData> savedAchievements = _achievementRepository.Load();
@@ -187,74 +209,15 @@ public class AchievementManager : MonoBehaviour
         DataChange?.Invoke();
     }
 
-    [Serializable]
-    public class AchievementCSVData
-    {
-        public string Id;
-        public string Name;
-        public string Description;
-        public EAchievementCondition Condition;
-        public int GoalValue;
-        public ECurrencyType RewardCurrencyType;
-        public int RewardValue;
-    }
-
-    [SerializeField] private string _csvAddress = "AchievementCSV"; // Addressable 주소
-
-    private IEnumerator LoadAchievementsFromCSV()
-    {
-        _achievementRepository = new AchievementRepository();
-        List<AchievementSaveData> savedAchievements = _achievementRepository.Load();
-
-        var handle = Addressables.LoadAssetAsync<TextAsset>(_csvAddress);
-        yield return handle;
-
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            var csvText = handle.Result.text;
-            var achievementList = ParseCSV(csvText);
-            _achievements.Clear();
-
-            foreach (var data in achievementList)
-            {
-                var saveData = savedAchievements?.Find(s => s.Id == data.Id);
-                Achievement achievement;
-                if (saveData != null)
-                    achievement = new Achievement(data, saveData.Value);
-                else
-                    achievement = new Achievement(data);
-
-                _achievements.Add(achievement);
-            }
-            DataChange?.Invoke();
-        }
-        else
-        {
-            Debug.LogError("CSV 파일 로드 실패");
-        }
-    }
-
-
-    private List<AchievementCSVData> ParseCSV(string csvText)
-    {
-        var lines = csvText.Split('\n').Skip(1); // 첫 줄은 헤더
-        var list = new List<AchievementCSVData>();
-        foreach (var line in lines)
-        {
-            if (string.IsNullOrWhiteSpace(line)) continue;
-            var tokens = line.Split(',');
-            var data = new AchievementCSVData
-            {
-                Id = tokens[0],
-                Name = tokens[1],
-                Description = tokens[2],
-                Condition = Enum.Parse<EAchievementCondition>(tokens[3]),
-                GoalValue = int.Parse(tokens[4]),
-                RewardCurrencyType = Enum.Parse<ECurrencyType>(tokens[5]),
-                RewardValue = int.Parse(tokens[6])
-            };
-            list.Add(data);
-        }
-        return list;
-    }
+    //[Serializable]
+    //public class AchievementCSVData
+    //{
+    //    public string Id;
+    //    public string Name;
+    //    public string Description;
+    //    public EAchievementCondition Condition;
+    //    public int GoalValue;
+    //    public ECurrencyType RewardCurrencyType;
+    //    public int RewardValue;
+    //}
 }

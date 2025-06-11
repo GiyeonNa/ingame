@@ -1,11 +1,15 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Achievement : MonoBehaviour
 {
     [SerializeField]
     private List<UI_AchievementSlot> _achievementSlots = new List<UI_AchievementSlot>();
+
+    [SerializeField]
+    private Button buttonTest;
 
     private void Start()
     {

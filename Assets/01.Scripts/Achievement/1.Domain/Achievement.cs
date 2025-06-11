@@ -31,44 +31,44 @@ public class Achievement
     private bool _isRewarded;
     public bool IsRewarded => _isRewarded;
 
-    public Achievement(AchievementSO achievementSO)
-    {
-        if (achievementSO == null)
-        {
-            throw new ArgumentNullException(nameof(achievementSO), "AchievementSO cannot be null");
-        }
-        //ID는 중복이 안됨
+    //public Achievement(AchievementSO achievementSO)
+    //{
+    //    if (achievementSO == null)
+    //    {
+    //        throw new ArgumentNullException(nameof(achievementSO), "AchievementSO cannot be null");
+    //    }
+    //    //ID는 중복이 안됨
 
-        Id = achievementSO.Id;
-        Name = achievementSO.Name;
-        Description = achievementSO.Description;
-        Condition = achievementSO.Condition;
-        GoalValue = achievementSO.GoalValue;
-        RewardCurrencyType = achievementSO.RewardCurrencyType;
-        RewardValue = achievementSO.RewardValue;
-        _currentValue = 0;
-        _isCompleted = false;
-    }
+    //    Id = achievementSO.Id;
+    //    Name = achievementSO.Name;
+    //    Description = achievementSO.Description;
+    //    Condition = achievementSO.Condition;
+    //    GoalValue = achievementSO.GoalValue;
+    //    RewardCurrencyType = achievementSO.RewardCurrencyType;
+    //    RewardValue = achievementSO.RewardValue;
+    //    _currentValue = 0;
+    //    _isCompleted = false;
+    //}
 
-    public Achievement(AchievementSO metaData, AchievementSaveData saveData)
-    {
-        if (metaData == null)
-        {
-            throw new ArgumentNullException(nameof(metaData), "AchievementSO cannot be null");
-        }
+    //public Achievement(AchievementSO metaData, AchievementSaveData saveData)
+    //{
+    //    if (metaData == null)
+    //    {
+    //        throw new ArgumentNullException(nameof(metaData), "AchievementSO cannot be null");
+    //    }
 
-        Id = metaData.Id;
-        Name = metaData.Name;
-        Description = metaData.Description;
-        Condition = metaData.Condition;
-        GoalValue = metaData.GoalValue;
-        RewardCurrencyType = metaData.RewardCurrencyType;
-        RewardValue = metaData.RewardValue;
+    //    Id = metaData.Id;
+    //    Name = metaData.Name;
+    //    Description = metaData.Description;
+    //    Condition = metaData.Condition;
+    //    GoalValue = metaData.GoalValue;
+    //    RewardCurrencyType = metaData.RewardCurrencyType;
+    //    RewardValue = metaData.RewardValue;
 
-        _currentValue = saveData.CurrentValue;
-        _isCompleted = saveData.IsCompleted;
-        _isRewarded = saveData.IsRewarded;
-    }
+    //    _currentValue = saveData.CurrentValue;
+    //    _isCompleted = saveData.IsCompleted;
+    //    _isRewarded = saveData.IsRewarded;
+    //}
 
     public Achievement(AchievementCSVData data)
     {

@@ -15,6 +15,13 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 9d3e9d157632cca4b927e0691ced35a7
   m_SerializeEntries:
+  - m_GUID: 3aa55177aa79a1346bf8ce3076291a91
+    m_Address: AttendaceList
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AttendanceCSV
+    - CSV
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d920ee6c1f391104e98c637e06e5f0a9
     m_Address: AchievementList
     m_ReadOnly: 0

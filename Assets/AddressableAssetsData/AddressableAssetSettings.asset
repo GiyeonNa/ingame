@@ -101,6 +101,7 @@ MonoBehaviour:
     - default
     - CSV
     - AchievementCSV
+    - AttendanceCSV
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 9e0df1f7a02ae07488a67431c32aae70, type: 2}

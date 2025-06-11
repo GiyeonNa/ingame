@@ -19,6 +19,20 @@ public class CurrencyRepository
         PlayerPrefs.SetString(SAVE_KEY, json);
     }
 
+    public void Save(List<CurrencyDTO> datas, string id)
+    {
+        CurrencySaveDatas data = new CurrencySaveDatas();
+        data.DataList = datas.ConvertAll(datas => new CurrencySaveData
+        {
+            Type = datas.Type,
+            Value = datas.Value
+        });
+
+        string json = JsonUtility.ToJson(data);
+        PlayerPrefs.SetString(SAVE_KEY + "_" + id, json);
+    }
+
+
     public List<CurrencyDTO> Load()
     {
         if(!PlayerPrefs.HasKey(SAVE_KEY))
