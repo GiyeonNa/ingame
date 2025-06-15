@@ -169,6 +169,11 @@ public class AttendanceManager : MonoBehaviour
         AttendanceChange?.Invoke();
     }
 
+    public bool TryGetRewardStatusByDay(int day, out DateTime date, out bool claimed)
+    {
+        return _attendance.TryGetRewardStatusByDay(day, out date, out claimed);
+    }
+
     // 출석 정보 조회
     public int GetStreakCount() => _attendance.StreakCount;
     public DateTime GetLastAttendanceDate() => _attendance.LastAttendanceDate;

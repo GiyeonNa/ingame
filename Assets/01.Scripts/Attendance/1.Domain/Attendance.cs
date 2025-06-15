@@ -226,4 +226,22 @@ public class Attendance
         // LastAttendanceDate는 그대로 두거나, 필요시 DateTime.MinValue로 초기화 가능
     }
 
+    // Attendance.cs에 추가
+    public bool TryGetRewardStatusByDay(int day, out DateTime date, out bool claimed)
+    {
+        // _rewardClaimedHistory의 날짜를 정렬
+        var dates = new List<DateTime>(_rewardClaimedHistory.Keys);
+        dates.Sort();
+        if (day - 1 < 0 || day - 1 >= dates.Count)
+        {
+            date = default;
+            claimed = false;
+            return false;
+        }
+        date = dates[day - 1];
+        claimed = _rewardClaimedHistory[date];
+        return true;
+    }
+
+
 }
