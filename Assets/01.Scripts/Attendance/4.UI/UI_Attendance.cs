@@ -83,40 +83,6 @@ public class UI_Attendance : MonoBehaviour
         AttendanceManager.Instance.AttendanceChange += Refresh;
     }
 
-    //private void Refresh()
-    //{
-    //    List<AttendanceRewardInfo> attendances = AttendanceManager.Instance.AttendanceRewardInfoList;
-    //    for (int i = 0; i < _attendanceSlots.Count; i++)
-    //    {
-    //        if (i < attendances.Count)
-    //        {
-    //            int day = attendances[i].Day;
-    //            DateTime? date = AttendanceManager.Instance.GetAttendanceDateByDay(day);
-
-    //            bool isClaimed = false;
-    //            bool isClaimable = false;
-
-    //            if (date.HasValue)
-    //            {
-    //                isClaimed = !AttendanceManager.Instance.CanClaimReward(date.Value); // 이미 수령했으면 true
-    //                isClaimable = AttendanceManager.Instance.CanClaimReward(date.Value); // 수령 가능하면 true
-    //            }
-
-    //            _attendanceSlots[i].gameObject.SetActive(true);
-    //            _attendanceSlots[i].SetData(attendances[i], isClaimed, isClaimable);
-    //        }
-    //        else
-    //        {
-    //            _attendanceSlots[i].gameObject.SetActive(false);
-    //        }
-    //    }
-
-    //    if (_attendanceStreak != null)
-    //    {
-    //        int streak = AttendanceManager.Instance.GetStreakCount();
-    //        _attendanceStreak.text = $"연속 출석: {streak}일";
-    //    }
-    //}
     private void Refresh()
     {
         List<AttendanceRewardInfo> attendances = AttendanceManager.Instance.AttendanceRewardInfoList;
@@ -125,17 +91,15 @@ public class UI_Attendance : MonoBehaviour
             if (i < attendances.Count)
             {
                 int day = attendances[i].Day;
-                DateTime date;
-                bool claimed;
-                bool hasAttendance = AttendanceManager.Instance.TryGetRewardStatusByDay(day, out date, out claimed);
+                DateTime? date = AttendanceManager.Instance.GetAttendanceDateByDay(day);
 
                 bool isClaimed = false;
                 bool isClaimable = false;
 
-                if (hasAttendance)
+                if (date.HasValue)
                 {
-                    isClaimed = claimed;
-                    isClaimable = !claimed;
+                    isClaimed = !AttendanceManager.Instance.CanClaimReward(date.Value); // 이미 수령했으면 true
+                    isClaimable = AttendanceManager.Instance.CanClaimReward(date.Value); // 수령 가능하면 true
                 }
 
                 _attendanceSlots[i].gameObject.SetActive(true);
@@ -153,5 +117,4 @@ public class UI_Attendance : MonoBehaviour
             _attendanceStreak.text = $"연속 출석: {streak}일";
         }
     }
-
 }
